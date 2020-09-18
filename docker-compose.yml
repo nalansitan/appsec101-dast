@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    image: "bkimminich/juice-shop"
+    ports:
+      - "127.0.0.1:3000:3000"
+  zap:
+    image: "owasp/zap2docker-stable"
+    ports:
+      - "127.0.0.1:8081:8080"
+    command: zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.addrs.addr.name='.*' -config api.addrs.addr.regex=true -config api.key=CanYouGuessMe
